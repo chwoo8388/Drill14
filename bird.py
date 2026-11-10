@@ -8,7 +8,8 @@ class Bird:
     FRAME_HEIGHT = 168
     FRAME_COUNT = 14
     FRAME_RATE = 12
-    MOVE_SPEED = 240
+    SPEED_KMPH = 10
+    SCREEN_WIDTH_KM = 100
     DRAW_WIDTH = 150
     DRAW_HEIGHT = 138
 
@@ -24,10 +25,13 @@ class Bird:
 
     def update(self):
         frame_time = game_framework.frame_time
-        self.x += self.direction * self.MOVE_SPEED * frame_time
+        canvas_width = get_canvas_width()
+        pixels_per_second = (
+            canvas_width * self.SPEED_KMPH / self.SCREEN_WIDTH_KM / 3600
+        )
+        self.x += self.direction * pixels_per_second * frame_time
 
         edge = self.DRAW_WIDTH / 2
-        canvas_width = get_canvas_width()
         if self.x >= canvas_width - edge:
             self.x = canvas_width - edge
             self.direction = -1
