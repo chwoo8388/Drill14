@@ -17,10 +17,10 @@ def run(game):
     global running, frame_time
     running = True
     frame_time = FRAME_INTERVAL
-    previous_time = time.perf_counter()
-    game.init()
 
     try:
+        game.init()
+        previous_time = time.perf_counter()
         while running:
             frame_start = time.perf_counter()
             frame_time = frame_start - previous_time

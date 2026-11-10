@@ -15,10 +15,15 @@ from bird import Bird
 
 class BirdGame:
     def __init__(self):
-        self.bird = None
+        self.birds = []
 
     def init(self):
-        self.bird = Bird()
+        self.birds = [
+            Bird(x=x, y=y, direction=1 if column % 2 == 0 else -1,
+                 frame=(column + row * 5) % Bird.FRAME_COUNT)
+            for row, y in enumerate((220, 420))
+            for column, x in enumerate((150, 475, 800, 1125, 1450))
+        ]
 
     def handle_events(self):
         for event in get_events():
@@ -28,15 +33,17 @@ class BirdGame:
                 bird_game_framework.quit()
 
     def update(self):
-        self.bird.update()
+        for bird in self.birds:
+            bird.update()
 
     def render(self):
         clear_canvas()
-        self.bird.draw()
+        for bird in self.birds:
+            bird.draw()
         update_canvas()
 
     def finish(self):
-        self.bird = None
+        self.birds.clear()
 
 
 if __name__ == '__main__':

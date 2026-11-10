@@ -1,8 +1,9 @@
-import game_framework
+import bird_game_framework as game_framework
 from pico2d import get_canvas_width, load_image
 
 
 class Bird:
+    image = None
     FRAME_WIDTH = 183
     FRAME_HEIGHT = 168
     FRAME_COUNT = 14
@@ -11,12 +12,14 @@ class Bird:
     DRAW_WIDTH = 150
     DRAW_HEIGHT = 138
 
-    def __init__(self):
-        self.image = load_image('bird_animation.png')
-        self.x = self.DRAW_WIDTH / 2
-        self.y = 300
-        self.direction = 1
-        self.frame = 0
+    def __init__(self, x=None, y=300, direction=1, frame=0):
+        if Bird.image is None:
+            Bird.image = load_image('bird_animation.png')
+        self.image = Bird.image
+        self.x = self.DRAW_WIDTH / 2 if x is None else x
+        self.y = y
+        self.direction = direction
+        self.frame = frame % self.FRAME_COUNT
         self.frame_elapsed = 0.0
 
     def update(self):
