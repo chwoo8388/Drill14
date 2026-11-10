@@ -8,7 +8,7 @@ class Bird:
     FRAME_HEIGHT = 168
     FRAME_COUNT = 14
     FRAME_RATE = 12
-    SPEED_KMPH = 10
+    SPEED_KMPS = 10
     SCREEN_WIDTH_KM = 100
     DRAW_WIDTH = 150
     DRAW_HEIGHT = 138
@@ -27,7 +27,7 @@ class Bird:
         frame_time = game_framework.frame_time
         canvas_width = get_canvas_width()
         pixels_per_second = (
-            canvas_width * self.SPEED_KMPH / self.SCREEN_WIDTH_KM / 3600
+            canvas_width * self.SPEED_KMPS / self.SCREEN_WIDTH_KM
         )
         self.x += self.direction * pixels_per_second * frame_time
 
